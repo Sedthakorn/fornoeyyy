@@ -1,0 +1,1477 @@
+```html
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For Noey 🌙</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #080b1c;
+            --bg2: #111632;
+            --purple: #9d8cff;
+            --pink: #ff9fcf;
+            --white: #f8f7ff;
+            --muted: #a7abc7;
+            --card: rgba(255,255,255,0.07);
+            --border: rgba(255,255,255,0.13);
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(103, 80, 180, .25), transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(255, 115, 183, .15), transparent 30%),
+                linear-gradient(145deg, var(--bg), var(--bg2));
+            color: var(--white);
+            font-family: "Kanit", sans-serif;
+            overflow-x: hidden;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%,100% {
+                opacity: .2;
+                transform: scale(.7);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.4);
+            }
+        }
+
+        .shooting-star {
+            position: fixed;
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, white);
+            transform: rotate(-35deg);
+            opacity: 0;
+            animation: shooting 7s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes shooting {
+            0% {
+                transform: translate(100vw, -20vh) rotate(-35deg);
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            15% {
+                transform: translate(55vw, 30vh) rotate(-35deg);
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           FLOATING EMOJI
+        ========================= */
+
+        .floating {
+            position: fixed;
+            pointer-events: none;
+            z-index: 2;
+            font-size: 28px;
+            animation: floatAround 8s ease-in-out infinite;
+            opacity: .75;
+        }
+
+        .f1 {
+            top: 18%;
+            left: 8%;
+        }
+
+        .f2 {
+            top: 65%;
+            right: 8%;
+            animation-delay: 2s;
+        }
+
+        .f3 {
+            top: 30%;
+            right: 15%;
+            animation-delay: 4s;
+        }
+
+        .f4 {
+            bottom: 12%;
+            left: 12%;
+            animation-delay: 1s;
+        }
+
+        @keyframes floatAround {
+            0%,100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+
+            50% {
+                transform: translateY(-25px) rotate(8deg);
+            }
+        }
+
+        /* =========================
+           GENERAL
+        ========================= */
+
+        .screen {
+            position: relative;
+            z-index: 5;
+            min-height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 18px;
+        }
+
+        .screen.active {
+            display: flex;
+            animation: pageIn .7s ease;
+        }
+
+        @keyframes pageIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            width: min(900px, 100%);
+            text-align: center;
+        }
+
+        .small-label {
+            color: var(--pink);
+            letter-spacing: 4px;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(40px, 8vw, 76px);
+            font-weight: 500;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: clamp(28px, 5vw, 45px);
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: var(--muted);
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        /* =========================
+           PASSWORD
+        ========================= */
+
+        .lock-icon {
+            font-size: 65px;
+            margin-bottom: 20px;
+            animation: lockFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes lockFloat {
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .password-box {
+            width: min(380px, 100%);
+            margin: 30px auto 0;
+            padding: 28px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 80px rgba(0,0,0,.3);
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 15px 18px;
+            border: 1px solid rgba(255,255,255,.15);
+            background: rgba(0,0,0,.2);
+            color: white;
+            border-radius: 15px;
+            outline: none;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .password-input:focus {
+            border-color: var(--pink);
+            box-shadow: 0 0 25px rgba(255,159,207,.15);
+        }
+
+        .btn {
+            border: none;
+            cursor: pointer;
+            padding: 13px 24px;
+            border-radius: 999px;
+            color: white;
+            font-size: 15px;
+            transition: .3s;
+        }
+
+        .btn-main {
+            width: 100%;
+            margin-top: 14px;
+            background: linear-gradient(135deg, #8d7cff, #e68fbd);
+            box-shadow: 0 10px 35px rgba(157,140,255,.25);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(157,140,255,.35);
+        }
+
+        .hint {
+            margin-top: 18px;
+            font-size: 13px;
+            color: #8e93b2;
+            cursor: pointer;
+        }
+
+        .hint:hover {
+            color: var(--pink);
+        }
+
+        #hintText {
+            display: none;
+            margin-top: 10px;
+            color: var(--pink);
+        }
+
+        .error {
+            color: #ff8eaa;
+            margin-top: 12px;
+            min-height: 20px;
+            font-size: 14px;
+        }
+
+        /* =========================
+           HOME
+        ========================= */
+
+        .moon {
+            width: 95px;
+            height: 95px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: #fff6da;
+            box-shadow:
+                0 0 30px rgba(255,246,218,.45),
+                0 0 100px rgba(255,246,218,.12);
+            position: relative;
+        }
+
+        .moon::after {
+            content: "";
+            position: absolute;
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            background: #0b0e22;
+            left: 28px;
+            top: -10px;
+        }
+
+        .home-text {
+            width: min(650px, 100%);
+            margin: 25px auto;
+        }
+
+        .home-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn-outline {
+            background: rgba(255,255,255,.05);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,.1);
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           LETTER
+        ========================= */
+
+        .letter {
+            position: relative;
+            width: min(680px, 100%);
+            margin: 30px auto;
+            padding: 45px 35px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.09),
+                    rgba(255,255,255,.025)
+                );
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            box-shadow: 0 30px 100px rgba(0,0,0,.3);
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .letter::before {
+            content: "♡";
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            font-size: 70px;
+            color: rgba(255,159,207,.08);
+        }
+
+        .letter p {
+            margin-bottom: 18px;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            color: var(--pink);
+        }
+
+        /* =========================
+           PHOTO
+        ========================= */
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .photo-card {
+            aspect-ratio: 1 / 1.15;
+            overflow: hidden;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.04);
+            position: relative;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .5s;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .photo-label {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            padding: 7px;
+            background: rgba(0,0,0,.45);
+            backdrop-filter: blur(8px);
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        /* =========================
+           APOLOGY
+        ========================= */
+
+        .apology-box {
+            width: min(650px, 100%);
+            margin: 30px auto;
+        }
+
+        .apology-line {
+            padding: 18px;
+            margin: 10px 0;
+            border-left: 2px solid var(--pink);
+            background: rgba(255,255,255,.04);
+            border-radius: 0 15px 15px 0;
+            text-align: left;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .apology-line.show {
+            animation: reveal .6s forwards;
+        }
+
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* =========================
+           CHOICE
+        ========================= */
+
+        .choice-area {
+            margin-top: 35px;
+        }
+
+        .choice-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .forgive-btn {
+            background: linear-gradient(135deg, #ff8fc5, #9b8cff);
+            font-size: 17px;
+            padding: 16px 32px;
+            box-shadow: 0 10px 35px rgba(255,143,197,.25);
+        }
+
+        .angry-btn {
+            background: rgba(255,255,255,.06);
+            border: 1px solid var(--border);
+        }
+
+        #angryText {
+            min-height: 30px;
+            margin-top: 20px;
+            color: var(--pink);
+        }
+
+        /* =========================
+           SUCCESS
+        ========================= */
+
+        .success-heart {
+            font-size: 90px;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%,100% {
+                transform: scale(1);
+            }
+
+            25% {
+                transform: scale(1.18);
+            }
+
+            45% {
+                transform: scale(1);
+            }
+
+            65% {
+                transform: scale(1.12);
+            }
+        }
+
+        .success-message {
+            width: min(600px, 100%);
+            margin: 20px auto;
+        }
+
+        /* =========================
+           HEART EFFECT
+        ========================= */
+
+        .heart-effect {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            animation: heartFly 2.5s ease-out forwards;
+            font-size: 25px;
+        }
+
+        @keyframes heartFly {
+            0% {
+                transform: translateY(0) scale(.5);
+                opacity: 1;
+            }
+
+            100% {
+                transform:
+                    translate(
+                        var(--x),
+                        -100vh
+                    )
+                    rotate(var(--r))
+                    scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           MUSIC BUTTON
+        ========================= */
+
+        .music-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 100;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.08);
+            color: white;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            font-size: 20px;
+            transition: .3s;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255,159,207,.15);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            .screen {
+                padding: 25px 15px;
+            }
+
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-card {
+                aspect-ratio: 1 / .8;
+            }
+
+            .letter {
+                padding: 30px 22px;
+            }
+
+            .floating {
+                font-size: 22px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         BACKGROUND
+    ========================= -->
+
+    <div class="stars" id="stars"></div>
+
+    <div class="shooting-star"></div>
+
+    <div class="floating f1">🌙</div>
+    <div class="floating f2">💗</div>
+    <div class="floating f3">✨</div>
+    <div class="floating f4">🫶</div>
+
+
+    <!-- =========================
+         PASSWORD SCREEN
+    ========================= -->
+
+    <section id="passwordScreen" class="screen active">
+
+        <div class="container">
+
+            <div class="lock-icon">🔐</div>
+
+            <div class="small-label">
+                PRIVATE SPACE
+            </div>
+
+            <h1>
+                สำหรับเนย
+            </h1>
+
+            <p style="margin-top:20px;">
+                มีพื้นที่เล็ก ๆ ที่มีโอ้ตั้งใจทำไว้ให้เธอครับ
+                <br>
+                แต่ก่อนจะเข้าไป...
+                ขอรหัสลับหน่อยนะ 🌙
+            </p>
+
+            <div class="password-box">
+
+                <input
+                    id="password"
+                    class="password-input"
+                    type="password"
+                    placeholder="ใส่รหัสลับ..."
+                    onkeydown="if(event.key==='Enter') checkPassword()"
+                >
+
+                <button
+                    class="btn btn-main"
+                    onclick="checkPassword()"
+                >
+                    เปิดประตู ✨
+                </button>
+
+                <div
+                    class="hint"
+                    onclick="showHint()"
+                >
+                    💡 ลืมรหัสแล้วเหรอ?
+                </div>
+
+                <div id="hintText">
+                    ลองนึกถึงเลขที่มีความหมายกับเราดูนะ 👀
+                </div>
+
+                <div
+                    id="passwordError"
+                    class="error"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOME
+    ========================= -->
+
+    <section id="homeScreen" class="screen">
+
+        <div class="container">
+
+            <div class="moon"></div>
+
+            <div class="small-label">
+                A LITTLE PLACE FOR YOU
+            </div>
+
+            <h1>
+                เนยครับ...
+            </h1>
+
+            <div class="home-text">
+
+                <p>
+                    บางทีคำว่า "ขอโทษนะ"
+                    ที่พิมพ์ผ่านแชตอาจจะธรรมดาเกินไป
+                </p>
+
+                <p style="margin-top:10px;">
+                    มีโอ้เลยอยากทำพื้นที่เล็ก ๆ
+                    ที่รวมคำที่อยากพูดกับเธอเอาไว้ทั้งหมด
+                </p>
+
+            </div>
+
+            <div class="home-buttons">
+
+                <button
+                    class="btn btn-main"
+                    style="width:auto;"
+                    onclick="goTo('letterScreen')"
+                >
+                    มีจดหมายถึงเธอ 💌
+                </button>
+
+                <button
+                    class="btn btn-outline"
+                    onclick="goTo('photoScreen')"
+                >
+                    ดูรูปของเรา 📸
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LETTER
+    ========================= -->
+
+    <section id="letterScreen" class="screen">
+
+        <div class="container">
+
+            <div class="small-label">
+                LETTER FOR YOU
+            </div>
+
+            <h2>
+                เปิดอ่านหน่อยนะครับ 💌
+            </h2>
+
+            <div class="letter">
+
+                <p>
+                    เนยครับ...
+                </p>
+
+                <p>
+                    มีโอ้ไม่รู้ว่าคำขอโทษของมีโอ้
+                    จะทำให้เธอหายเสียใจได้มากแค่ไหน
+                    แต่มีโอ้อยากพูดมันออกมาจริง ๆ
+                </p>
+
+                <p>
+                    ถ้าสิ่งที่มีโอ้พูดหรือทำไป
+                    ทำให้เนยรู้สึกไม่ดี
+                    มีโอ้ขอโทษนะครับ
+                </p>
+
+                <p>
+                    มีโอ้ไม่ได้อยากเอาชนะ
+                    ไม่ได้อยากให้เราต้องมาทะเลาะกัน
+                    หรือทำเหมือนว่าใครเป็นฝ่ายผิด
+                </p>
+
+                <p>
+                    สิ่งที่มีโอ้อยากรักษามากกว่าอะไรทั้งหมด
+                    คือความรู้สึกดี ๆ ที่เรามีให้กันครับ
+                </p>
+
+                <p>
+                    ต่อให้วันนี้เธอยังโกรธ
+                    มีโอ้ก็ยังอยู่ตรงนี้นะ
+                </p>
+
+                <div class="signature">
+                    จากมีโอ้<br>
+                    คนที่กำลังง้อเธออยู่ครับ 🥺
+                </div>
+
+            </div>
+
+            <button
+                class="btn btn-main"
+                style="width:auto;"
+                onclick="goTo('photoScreen')"
+            >
+                ต่อไป 📸
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PHOTO
+    ========================= -->
+
+    <section id="photoScreen" class="screen">
+
+        <div class="container">
+
+            <div class="small-label">
+                OUR LITTLE MEMORIES
+            </div>
+
+            <h2>
+                รูปของเรา 📸
+            </h2>
+
+            <p>
+                พวกเราน่ารักกเนาะะะะะ
+            </p>
+
+            <div class="photo-grid">
+
+                <div class="photo-card">
+
+                    <img
+                        src="มีโอ้.jpg"
+                        onerror="this.src='https://placehold.co/600x700/151936/ffffff?text=ME+%F0%9F%8C%99'"
+                    >
+
+                    <div class="photo-label">
+                        มีโอ้ 🌙
+                    </div>
+
+                </div>
+
+                <div class="photo-card">
+
+                    <img
+                        src="เนยยย.jpg"
+                        onerror="this.src='https://placehold.co/600x700/151936/ffffff?text=NOEY+%F0%9F%92%97'"
+                    >
+
+                    <div class="photo-label">
+                        เนย 💗
+                    </div>
+
+                </div>
+
+                <div class="photo-card">
+
+                    <img
+                        src="คู่0.2.jpg"
+                        onerror="this.src='https://placehold.co/600x700/151936/ffffff?text=US+%E2%9C%A8'"
+                    >
+
+                    <div class="photo-label">
+                        เราสองคน ✨
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                class="btn btn-main"
+                style="width:auto;"
+                onclick="goTo('apologyScreen')"
+            >
+                มีอีกอย่างอยากบอก 🥺
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         APOLOGY
+    ========================= -->
+
+    <section id="apologyScreen" class="screen">
+
+        <div class="container">
+
+            <div class="small-label">
+                ONE MORE THING
+            </div>
+
+            <h2>
+                มีโอ้อยากให้เนยรู้ 🥺
+            </h2>
+
+            <div class="apology-box">
+
+                <div class="apology-line">
+                    01 — มีโอ้ขอโทษที่บางครั้งพูดอะไรโดยไม่ได้คิดให้ดีครับ
+                </div>
+
+                <div class="apology-line">
+                    02 — มีโอ้จะพยายามฟังความรู้สึกของเนยให้มากขึ้น
+                </div>
+
+                <div class="apology-line">
+                    03 — ถ้าเนยต้องการเวลา มีโอ้จะเคารพเวลาของเธอครับ
+                </div>
+
+                <div class="apology-line">
+                    04 — มีโอ้ไม่อยากให้การทะเลาะกันทำให้เราลืมว่าจริง ๆ แล้วเรารู้สึกดีต่อกันแค่ไหน
+                </div>
+
+                <div class="apology-line">
+                    05 — และสุดท้าย... มีโอ้คิดถึงเนยครับ 🫂
+                </div>
+
+            </div>
+
+            <button
+                class="btn btn-main"
+                style="width:auto;"
+                onclick="showApologyLines()"
+            >
+                อ่านให้ครบก่อนนะ 👀
+            </button>
+
+            <br><br>
+
+            <button
+                class="btn btn-outline"
+                onclick="goTo('choiceScreen')"
+            >
+                ไปต่อ 💗
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CHOICE
+    ========================= -->
+
+    <section id="choiceScreen" class="screen">
+
+        <div class="container">
+
+            <div style="font-size:70px;">
+                🥺👉👈
+            </div>
+
+            <div class="small-label">
+                THE IMPORTANT QUESTION
+            </div>
+
+            <h2>
+                แล้ว...
+            </h2>
+
+            <h1 style="font-size:clamp(35px,7vw,65px);">
+                หายงอนมีโอ้ได้ไหมครับ?
+            </h1>
+
+            <p style="margin-top:20px;">
+                ไม่ต้องรีบตอบก็ได้นะครับ
+                <br>
+                แต่อยากลองถามดูสักครั้ง 🥺
+            </p>
+
+            <div class="choice-area">
+
+                <div class="choice-buttons">
+
+                    <button
+                        id="forgiveButton"
+                        class="btn forgive-btn"
+                        onclick="forgive()"
+                    >
+                        หายงอนแล้ว 💗
+                    </button>
+
+                    <button
+                        id="angryButton"
+                        class="btn angry-btn"
+                        onclick="stillAngry()"
+                    >
+                        ยังงอนอยู่ 😾
+                    </button>
+
+                </div>
+
+                <div id="angryText"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SUCCESS
+    ========================= -->
+
+    <section id="successScreen" class="screen">
+
+        <div class="container">
+
+            <div class="success-heart">
+                💗
+            </div>
+
+            <div class="small-label">
+                MISSION COMPLETE
+            </div>
+
+            <h1>
+                ขอบคุณนะครับเนย
+            </h1>
+
+            <div class="success-message">
+
+                <p>
+                    ขอบคุณที่เปิดเข้ามาดูจนถึงตรงนี้นะ
+                </p>
+
+                <p style="margin-top:15px;">
+                    มีโอ้ไม่สัญญาว่าจะไม่ทำพลาดอีกเลย
+                    เพราะมีโอ้ก็เป็นคนธรรมดา
+                </p>
+
+                <p style="margin-top:15px;">
+                    แต่มีโอ้สัญญาว่า
+                    ถ้าทำให้เธอเสียใจ
+                    มีโอ้จะพยายามเรียนรู้
+                    และทำให้ดีกว่าเดิมครับ
+                </p>
+
+                <p style="margin-top:20px; color:var(--pink);">
+                    กอดหนึ่งที 🫂
+                    <br>
+                    แล้วก็ขอให้หลับฝันดีจุ๊บเหม่งน๊าค้าบบบ🌙
+                </p>
+
+            </div>
+
+            <button
+                class="btn btn-main"
+                style="width:auto;"
+                onclick="restart()"
+            >
+                ดูใหม่อีกครั้ง 🔄
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MUSIC
+         ไฟล์เพลงต้องชื่อ "แค่คุณ.mp3"
+         และอยู่โฟลเดอร์เดียวกับ index.html
+    ========================= -->
+
+    <audio id="bgMusic" loop>
+        <source src="แค่คุณ.mp3" type="audio/mpeg">
+    </audio>
+
+    <button
+        class="music-btn"
+        onclick="toggleMusic()"
+        id="musicButton"
+    >
+        🎵
+    </button>
+
+
+<script>
+
+    /* =====================================
+       PASSWORD
+    ===================================== */
+
+    const SECRET_PASS = "2549";
+
+
+    /* =====================================
+       CREATE STARS
+    ===================================== */
+
+    const starsContainer =
+        document.getElementById("stars");
+
+    for(let i = 0; i < 100; i++){
+
+        const star =
+            document.createElement("div");
+
+        star.className = "star";
+
+        star.style.left =
+            Math.random() * 100 + "%";
+
+        star.style.top =
+            Math.random() * 100 + "%";
+
+        star.style.animationDelay =
+            Math.random() * 3 + "s";
+
+        star.style.opacity =
+            Math.random();
+
+        starsContainer.appendChild(star);
+    }
+
+
+    /* =====================================
+       PASSWORD
+    ===================================== */
+
+    function checkPassword(){
+
+        const input =
+            document.getElementById("password").value;
+
+        const error =
+            document.getElementById("passwordError");
+
+        if(input === SECRET_PASS){
+
+            error.innerText = "";
+
+            goTo("homeScreen");
+
+        } else {
+
+            error.innerText =
+                "รหัสยังไม่ถูกนะครับ ลองใหม่อีกครั้ง 🥺";
+
+        }
+
+    }
+
+
+    function showHint(){
+
+        const hint =
+            document.getElementById("hintText");
+
+        hint.style.display =
+            hint.style.display === "block"
+            ? "none"
+            : "block";
+
+    }
+
+
+    /* =====================================
+       PAGE SYSTEM
+    ===================================== */
+
+    function goTo(id){
+
+        document
+            .querySelectorAll(".screen")
+            .forEach(screen => {
+
+                screen.classList.remove("active");
+
+            });
+
+        const target =
+            document.getElementById(id);
+
+        target.classList.add("active");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+        if(id === "apologyScreen"){
+
+            resetApology();
+
+        }
+
+    }
+
+
+    /* =====================================
+       APOLOGY ANIMATION
+    ===================================== */
+
+    function resetApology(){
+
+        document
+            .querySelectorAll(".apology-line")
+            .forEach(line => {
+
+                line.classList.remove("show");
+
+            });
+
+    }
+
+
+    function showApologyLines(){
+
+        const lines =
+            document.querySelectorAll(".apology-line");
+
+        lines.forEach((line, index) => {
+
+            setTimeout(() => {
+
+                line.classList.add("show");
+
+            }, index * 450);
+
+        });
+
+    }
+
+
+    /* =====================================
+       STILL ANGRY
+    ===================================== */
+
+    let angryCount = 0;
+
+    function stillAngry(){
+
+        angryCount++;
+
+        const text =
+            document.getElementById("angryText");
+
+        const button =
+            document.getElementById("angryButton");
+
+        const messages = [
+
+            "โอเคครับ... มีโอ้รอได้ 🥺",
+
+            "ยังงอนอยู่จริง ๆ เหรอครับ 😭",
+
+            "งั้นมีโอ้ขอเพิ่มความพยายามอีกนิดนะ 🥺👉👈",
+
+            "โอเค ๆ ไม่กวนแล้วครับ แต่ยังอยากง้ออยู่ 🫂",
+
+            "มีโอ้จะนั่งรอตรงนี้จนกว่าเนยจะใจอ่อนเลย 🌙"
+
+        ];
+
+        text.innerText =
+            messages[
+                Math.min(
+                    angryCount - 1,
+                    messages.length - 1
+                )
+            ];
+
+        const x =
+            Math.random() * 80 - 40;
+
+        const y =
+            Math.random() * 50 - 25;
+
+        button.style.transform =
+            `translate(${x}px, ${y}px)`;
+
+        const forgiveButton =
+            document.getElementById("forgiveButton");
+
+        const size =
+            17 + angryCount * 1.2;
+
+        forgiveButton.style.fontSize =
+            size + "px";
+
+    }
+
+
+    /* =====================================
+       FORGIVE
+    ===================================== */
+
+    function forgive(){
+
+        createHearts(45);
+
+        setTimeout(() => {
+
+            goTo("successScreen");
+
+        }, 900);
+
+    }
+
+
+    /* =====================================
+       HEART EFFECT
+    ===================================== */
+
+    function createHearts(amount){
+
+        const hearts = [
+            "💗",
+            "💖",
+            "💕",
+            "💘",
+            "💞",
+            "🩷",
+            "✨"
+        ];
+
+        for(let i = 0; i < amount; i++){
+
+            const heart =
+                document.createElement("div");
+
+            heart.className =
+                "heart-effect";
+
+            heart.innerText =
+                hearts[
+                    Math.floor(
+                        Math.random() * hearts.length
+                    )
+                ];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.bottom =
+                "-30px";
+
+            heart.style.setProperty(
+                "--x",
+                (Math.random() * 300 - 150) + "px"
+            );
+
+            heart.style.setProperty(
+                "--r",
+                (Math.random() * 90 - 45) + "deg"
+            );
+
+            heart.style.animationDuration =
+                (1.5 + Math.random() * 2) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+
+                heart.remove();
+
+            }, 4000);
+
+        }
+
+    }
+
+
+    /* =====================================
+       MUSIC
+    ===================================== */
+
+    const music =
+        document.getElementById("bgMusic");
+
+    let musicPlaying = false;
+
+    function toggleMusic(){
+
+        if(musicPlaying){
+
+            music.pause();
+
+            musicPlaying = false;
+
+            document.getElementById(
+                "musicButton"
+            ).innerText = "🎵";
+
+        } else {
+
+            music.play()
+                .then(() => {
+
+                    musicPlaying = true;
+
+                    document.getElementById(
+                        "musicButton"
+                    ).innerText = "🔊";
+
+                })
+                .catch(() => {
+
+                    alert(
+                        "หาไฟล์ แค่คุณ.mp3 ไม่เจอครับ\n\nเอาไฟล์เพลงไปไว้โฟลเดอร์เดียวกับ index.html ก่อนนะครับ 🎵"
+                    );
+
+                });
+
+        }
+
+    }
+
+
+    /* =====================================
+       RESTART
+    ===================================== */
+
+    function restart(){
+
+        angryCount = 0;
+
+        document.getElementById(
+            "password"
+        ).value = "";
+
+        document.getElementById(
+            "angryText"
+        ).innerText = "";
+
+        document.getElementById(
+            "angryButton"
+        ).style.transform = "";
+
+        document.getElementById(
+            "forgiveButton"
+        ).style.fontSize = "";
+
+        goTo("homeScreen");
+
+    }
+
+</script>
+
+</body>
+</html>
+```
